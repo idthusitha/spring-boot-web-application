@@ -40,12 +40,13 @@ dependencyManagement {
 	}
 }
 
-task deploy(dependsOn: [clean,war]) {		
-	println 'war.archivePath: '+war.archivePath
-	 copy {
-	  rename {String fileName -> 'spring-boot-web-application.war'}
-	  from war.archivePath
-	  into "/rezsystem/tomcat1/apache-tomcat-8.0.36/webapps"
+def tomcat_home = "/rezsystem/tomcat1/apache-tomcat-8.0.36"
+
+task deploy(dependsOn: [clean,war]) << {		
+	println "Copy from ${libsDir.getPath()} into ${tomcat_home}/webapps"
+	copy {	  
+	  from "build/libs"
+	  into "${tomcat_home}/webapps"
 	  include "*.war"	  
-	 }
+	}
 }
