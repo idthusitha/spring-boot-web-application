@@ -52,7 +52,7 @@ dependencyManagement {
 
 def tomcat_home = "/rezsystem/tomcat1/apache-tomcat-8.0.36"
 
-task deploy(dependsOn: [clean,war]) << {		
+task deploy(dependsOn: [clean,war]) {		
 	println "Copy from ${libsDir.getPath()} into ${tomcat_home}/webapps"
 	copy {	  
 	  from "build/libs"
